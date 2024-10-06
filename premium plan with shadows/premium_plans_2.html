@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Card Layout</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #2d333f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card-container {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+      gap: 20px;
+      width: 90%;
+      max-width: 1400px;
+    }
+
+    .card {
+      background-color: #1c1f26;
+      color: #e0e0e0;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: 18px;
+      width: 100%;
+    }
+
+    .card h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .card .price {
+      font-size: 32px;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 25px;
+    }
+    .card h2{
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .card h3{
+      font-size: 13px;
+      font-weight: normal;
+      margin-bottom: 10px;
+    }
+
+    .card .price small {
+      font-size: 14px;
+      font-weight: normal;
+      color: #b0b0b0;
+    }
+
+    .card .description {
+      font-size: 14px;
+      margin-bottom: 15px;
+      color: #d1d1d1;
+    }
+
+    .card .features {
+      font-size: 14px;
+      margin-bottom: 20px;
+      color: #d1d1d1;
+    }
+
+    .card .features ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .card .features ul li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .card .features ul li::before {
+      content: '•';
+      margin-right: 10px;
+      font-size: 18px;
+      color: #435dba;
+    }
+
+    .card button {
+      padding: 12px 20px;
+      background-color: #435dba;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .card1 {
+      grid-column: 1;
+      grid-row: 1;
+      padding: 30px;
+      background: linear-gradient(180deg, #000000, #1f2a50);
+      text-align: left;
+      color: #ffffff;
+      box-shadow: inset 0 -50px 100px -25px #435dba,
+      0 8px 16px rgba(0, 0, 0, 0.4); /* Outer shadow */
+    }
+
+    .card1 h1 {
+      font-size: 25px;
+      margin-bottom: 10px;
+    }
+    .card1 span{
+      color: #bbb;
+    }
+
+    .card1 p {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #e0e0e0;
+    }
+    .card1 .part2 {
+      font-size: 13px;
+      color: #bbb;
+      margin-top: 10px;
+    }
+    .card1 .footer{
+      margin-top: 50px;
+    }
+
+    .card1 .spot-left {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .card1 .spot-left::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    .card1 .footer-text {
+      font-size: 12px;
+      color: #bbbbbb;
+      margin-top: 10px;
+    }
+
+    .card1 .footer-text strong {
+      color: #ffffff;
+    }
+
+    /* Toggle container for Card 1 */
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      box-sizing: border-box;
+      margin-top: 10px;
+    }
+
+    /* Dots styling */
+    .dots-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      background-color: #bbb;
+      border-radius: 50%;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .dot.active {
+      background-color: #435dba;
+    }
+
+    /* Card 4 styled like the "Good to know" section */
+    .card4 {
+      grid-column: span 2;
+      padding: 30px;
+      background:#000000;
+      text-align: left;
+      color: #ffffff;
+      box-shadow: inset 0 50px 150px -15px #435dba, /* Focused shadow at the top */
+      0 8px 16px rgba(0, 0, 0, 0.4); /* Outer shadow */
+    }
+
+    .card4 h2 {
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .card4 p {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #cfcfcf;
+      line-height: 1.5;
+    }
+
+    .card4 p span {
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    .card4 p em {
+      font-style: italic;
+      color: #ffffff;
+    }
+
+    .card4 .footer-text {
+      font-size: 12px;
+      color: #a9a9a9;
+      margin-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 10px;
+    }
+
+    /* Responsive pricing cards (2, 3, 5) */
+    .card2, .card3, .card5 {
+      background-color: #1c1f26;
+    }
+
+    /* Card-specific grid placement */
+    .card2 {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .card3 {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    .card5 {
+      grid-column: 3;
+      grid-row: 2;
+    }
+
+    @media (max-width: 700px) {
+    .card-container{
+        display: block;
+    }
+    .card{
+        margin-bottom: 20px;
+    }
+    }
+  </style>
+</head>
+<body>
+  <div class="card-container">
+    <!-- Card 1 styled like the first image -->
+    <div class="card card1">
+      <h1>Tailored design & <span>dev packages</span></h1>
+            <!-- Carousel for changing spots left -->
+            <div class="carousel">
+                <div class="carousel-track">
+                  <!-- First spot description -->
+                  <div class="carousel-slide">
+                    <div class="services">
+                        <p>Project management with Breeew, secure payments with Stripe and the freedom of cancelling your subscription anytime.</p>
+                        <div class="footer">
+                        <hr>
+                      <p class="part2">Project management with Breeew, secure payments with Stripe.</p>
+                    </div>
+                  </div>
+                  </div>
+        
+                  <!-- Second spot description -->
+                  <div class="carousel-slide">
+                    <div class="services">
+                      <p>Additional services available for growing businesses, including design and development tailored to your needs.</p>
+                      <p>Project management with Breeew, secure payments with Stripe.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                    <!-- Dots for navigating between spots -->
+      <div class="dots-container">
+        <div class="dot active" onclick="moveToSpot(0)"></div>
+        <div class="dot" onclick="moveToSpot(1)"></div>
+      </div>
+    </div>
+
+    <!-- Card 2 styled like pricing card -->
+    <div class="card card2">
+      <div class="price">$1499 <small>/monthly</small></div>
+      <h2>Design</h2>
+      <p class="description">Ideal for emerging businesses.</p>
+      <div class="features">
+        <h3>WHAT YOU GET :</h3>
+        <ul>
+          <li>Design in Figma</li>
+          <li>1 request at a time</li>
+          <li>Unlimited feedback</li>
+        </ul>
+      </div>
+      <button>Get started</button>
+    </div>
+
+    <!-- Card 3 styled like pricing card -->
+    <div class="card card3">
+      <div class="price">$1999 <small>/monthly</small></div>
+      <h2>Development</h2>
+      <p class="description">Best for growing businesses that need fast development support.</p>
+      <div class="features">
+        <h3>WHAT YOU GET :</h3>
+        <ul>
+          <li>Custom web development</li>
+          <li>2 requests at a time</li>
+          <li>Priority support</li>
+        </ul>
+      </div>
+      <button>Get started</button>
+    </div>
+
+    <!-- Card 4 styled like the second image -->
+    <div class="card card4">
+      <h2>Good to know</h2>
+      <p>Monomod specializes in design and development, excluding design system, 3D, prototypes, mobile apps, illustrations, CMS, back-end, hosting, marketing, copywriting & complex creations from Monomod.</p>
+      <p>Monomod speaks English, Spanish, Italian & Swedish. Feel free to choose!</p>
+    </div>
+
+    <!-- Card 5 styled like pricing card -->
+    <div class="card card5">
+      <div class="price">$2999 <small>/monthly</small></div>
+      <h2>Premium Package</h2>
+      <p class="description">Perfect for large businesses.</p>
+      <div class="features">
+        <h3>WHAT YOU GET :</h3>
+        <ul>
+          <li>Full-stack development</li>
+          <li>3 requests at a time</li>
+          <li>VIP support</li>
+        </ul>
+      </div>
+      <button>Get started</button>
+    </div>
+  </div>
+  <script>
+    let currentIndex = 0;
+    const dots = document.querySelectorAll('.dot');
+
+    function moveToSpot(index) {
+      const track = document.querySelector('.carousel-track');
+      currentIndex = index;
+      const translateX = index * -100; // Moves left by 100% per slide
+      track.style.transform = `translateX(${translateX}%)`;
+      updateDots();
+    }
+
+    function updateDots() {
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+      });
+    }
+  </script>
+</body>
+</html>
